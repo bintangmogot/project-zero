@@ -3,10 +3,10 @@
     "editor.quickSuggestions": {
         "other": "on",
         "comments": "off",
-        "strings": "on"
+        "strings": "off"
     },
     "editor.suggestOnTriggerCharacters": true,
-    "editor.parameterHints.enabled": false,
+    "editor.parameterHints.enabled": true,
     "editor.wordBasedSuggestions": "off",
     "editor.hover.enabled": "on",
     "editor.lightbulb.enabled": "off",

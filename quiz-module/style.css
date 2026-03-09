@@ -1,4 +1,3 @@
-
 /* basic reset */
 *{
     margin: 0;
@@ -52,11 +51,29 @@ button {
     margin-top: 1rem;
 }
 
-#start-btn:hover, .restart-btn:hover{
+
+.prev-btn, .restart-btn{
+    background-color: transparent;
+    border: 2px solid #e86b31;
+    color: #e86b31;
+    transition: all 0.2s ease;
+}
+.prev-btn:hover, .restart-btn:hover{
+    background-color: #e86a331d;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.skip-btn{
+    align-self: self-end;
+}
+
+#start-btn, .skip-btn{
+    transition: all 0.2s ease;
+}
+#start-btn:hover, .skip-btn:hover{
     background-color: #f86e2d;
     transform: scale(1.1);
-    transition-duration: 200ms;
-    transition-delay: 50ms;
     cursor:pointer;
 }
 
@@ -82,7 +99,6 @@ button {
     flex-direction:column;
     gap: 20px;
     padding: 40px;
-    margin-bottom:20px;
 }
 
 .answers-btn{
@@ -93,6 +109,7 @@ button {
     text-align: left;
     color: #222;
     font-weight: bolder;
+    transition: all 0.2s ease;
 }
 
 .answers-btn:hover{
@@ -159,6 +176,19 @@ button {
     font-weight: bold;
 }
 
+.navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+.fail-theme{
+    background-color: #ff011628;
+    color: #e62222;
+    border: 2px solid #e62222;
+}
 
 
 /* RESPONSIVE DESIGN */

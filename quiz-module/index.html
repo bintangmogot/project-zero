@@ -25,7 +25,10 @@
             <div id="answers-container" class="answers-container">
                 <!-- answers will fill up here by js -->
             </div>
-
+            <div class="navigation">
+                <button id="prev" class="prev-btn">Previous</button>
+                <button id="skip" class="skip-btn">Skip</button>
+            </div>
             <div class="progress-bar">
                 <div id="progress" class="progress"></div>
             </div>
@@ -33,11 +36,12 @@
 
         <div id="result-screen" class="screen">
             <h1>Quiz Result</h1>
-            <div class="result-info">
+            <div id="result-info" class="result-info">
                     <p>You scored <span id="final-score">[num]</span> out of <span id="max-score">[num]</span></p>
                     <h2 id="result-message"></h2>
-                </div>
+            </div>
             <button id="restart-btn" class="restart-btn">Restart Quiz</button>
+            <button id="next-quiz-btn" class="next-btn">Next Quiz</button>
         </div>
     </div>
 
