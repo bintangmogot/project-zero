@@ -19,17 +19,19 @@ const nextQuizButton = document.getElementById("next-quiz-btn");
 const resultMessageContainer = document.getElementById("result-info");
 
 
-const chuninExam = [
-    {
-        question: "What is the name of the First Hokage who also founded the Hidden Leaf Village (Konoha)?",
-        answers: [
-            { text: "Tobirama Senju", correct: false },
-            { text: "Hashirama Senju", correct: true },
-            { text: "Hiruzen Sarutobi", correct: false },
-            { text: "Minato Namikaze", correct: false }
-        ]
-    },
-    {
+const allStages = [
+    {title: "Level 1: Genin Exam", 
+     quiz: [
+        {
+            question: "What is the name of Naruto's signature jutsu that creates multiple copies of himself?",
+            answers: [
+                { text: "Rasengan", correct: false },
+                { text: "Shadow Clone Jutsu", correct: true },
+                { text: "Chidori", correct: false },
+                { text: "Summoning Jutsu", correct: false }
+            ]
+        },
+ {
         question: "What is the name of the Tailed Beast (Bijuu) sealed inside Gaara?",
         answers: [
             { text: "Shukaku", correct: true },
@@ -91,24 +93,62 @@ const chuninExam = [
             { text: "During the battle with Orochimaru", correct: false },
             { text: "During the battle with the Akatsuki", correct: false }
         ]
-    }
+    },
+    {
+        question: "What is the name of the First Hokage who also founded the Hidden Leaf Village (Konoha)?",
+        answers: [
+            { text: "Tobirama Senju", correct: false },
+            { text: "Hashirama Senju", correct: true },
+            { text: "Hiruzen Sarutobi", correct: false },
+            { text: "Minato Namikaze", correct: false }
+        ]
+    },
+   
+    ]},
 
+    {title: "Level 2: Chunin Exam",
+        quiz: [
+            {
+                question: "What is the name of the powerful technique used by the Third Hokage, Hiruzen Sarutobi, to summon the Monkey King Enma?",
+                answers: [
+                    { text: "Summoning Jutsu", correct: false },
+                    { text: "Enma's Transformation", correct: false },
+                    { text: "Monkey King Enma's Summoning", correct: true },
+                    { text: "Shadow Clone Jutsu", correct: false }
+                ]
+            },
+    ]},
+    {title: "Level 3: Jonin Exam",
+        quiz: [
+            {
+                question: "What is the name of the powerful technique used by the Fourth Hokage, Minato Namikaze, to teleport instantly to any location?",
+                answers: [
+                    { text: "Flying Thunder God Technique", correct: true },
+                    { text: "Rasengan", correct: false },
+                    { text: "Chidori", correct: false },
+                    { text: "Shadow Clone Jutsu", correct: false }
+                ]
+            },
+    ]},
 
 ];
 
+
+let currentStageIndex = 0;
+let currentQuizData = allStages[currentStageIndex].quiz;
 let currentQuestionIndex = 0;
 let score = 0;
 let answerDisabled = false;
 let isAnswered = [];
 
-totalQuestionsSpan.textContent = chuninExam.length;
-maxScoreSpan.textContent = chuninExam.length;
+totalQuestionsSpan.textContent = currentQuizData.length;
+maxScoreSpan.textContent = currentQuizData.length;
 // event listeners
 startButton.addEventListener("click", startQuiz);
 restartButton.addEventListener("click", restartQuiz);
 prevButton.addEventListener("click", prevQuestion);
 skipButton.addEventListener("click", ()=>{
-    if(currentQuestionIndex < chuninExam.length - 1){
+    if(currentQuestionIndex < currentQuizData.length - 1){
         currentQuestionIndex++;
         showQuestion(); 
     }
@@ -116,7 +156,7 @@ skipButton.addEventListener("click", ()=>{
         showResult();
     }
 });
-
+nextQuizButton.addEventListener("click", nextQuiz);
 
 
 function prevQuestion(){
@@ -130,9 +170,9 @@ function prevQuestion(){
 
 function showQuestion(){
     answerDisabled = false;
-    const currentQuestion = chuninExam[currentQuestionIndex];
+    const currentQuestion = currentQuizData[currentQuestionIndex];
     currentQuestionSpan.textContent = currentQuestionIndex+1;
-    const progressPercent = ((currentQuestionIndex) / chuninExam.length) * 100;
+    const progressPercent = ((currentQuestionIndex) / currentQuizData.length) * 100;
     progressBar.style.width = progressPercent + "%";
     questionText.textContent = currentQuestion.question;
 
@@ -149,9 +189,12 @@ function showQuestion(){
         answersContainer.appendChild(button);
     });
     
-    if(currentQuestionIndex === chuninExam.length - 1){
+    if(currentQuestionIndex === currentQuizData.length - 1){
         skipButton.textContent = "Finish";
         skipButton.style.backgroundColor = "#4CAF50";
+    }else{
+        skipButton.textContent = "Skip";
+        skipButton.style.backgroundColor = "#e86b31";
     }
     // prev navigation buttons
     if(currentQuestionIndex === 0 || isAnswered[currentQuestionIndex - 1] === true){
@@ -186,7 +229,7 @@ function showQuestion(){
         setTimeout(()=>{
             currentQuestionIndex++;
             // check if there are more questions or the quiz is over
-            if(currentQuestionIndex < chuninExam.length){
+            if(currentQuestionIndex < currentQuizData.length){
                 showQuestion();
             }else{
                 showResult();
@@ -202,9 +245,13 @@ function showQuestion(){
 function showResult(){
     quizScreen.classList.remove("active");
     resultScreen.classList.add("active");
+    // Reset warna pesan ke default orange
+    resultMessage.style.color = "#e86b31";
+    resultMessageContainer.classList.remove("fail-theme");
+
 
     finalScoreSpan.textContent = score;
-    const percentage = (score/chuninExam.length) * 100;
+    const percentage = (score/currentQuizData.length) * 100;
 
   if (percentage === 100) {
     resultMessage.textContent = "Perfect! You're a genius!";
@@ -216,8 +263,26 @@ function showResult(){
     resultMessage.textContent = "Keep studying! You'll get better!";
     resultMessage.style.color = "#e62222";
     resultMessageContainer.classList.add("fail-theme");
-    nextQuizButton.style.display = "none";
-  }
+}
+if (percentage < 60) {
+        // JIKA GAGAL: Sembunyikan Next, Restart tetap di level yang sama
+        nextQuizButton.style.display = "none";
+        restartButton.textContent = "Try Level " + (currentStageIndex + 1) + " Again";
+    } else {
+        // JIKA LULUS: Cek apakah masih ada level selanjutnya
+        if (currentStageIndex < allStages.length - 1) {
+            nextQuizButton.style.display = "inline-block";
+            nextQuizButton.textContent = "Next Level: " + allStages[currentStageIndex + 1].title;
+            restartButton.textContent = "Restart This Level";
+        } else {
+            // JIKA LULUS STAGE TERAKHIR
+            nextQuizButton.style.display = "none";
+            resultMessage.textContent = "🎉 MISSION COMPLETE! You are a Hokage!";
+            restartButton.textContent = "Play Again from Level 1";
+            restartButton.style.backgroundColor = "#4CAF50"; // Warnai hijau sebagai tanda tamat
+            restartButton.style.color = "white";
+        }
+    }
 
 }
 
@@ -229,7 +294,9 @@ function startQuiz(){
     startScreen.classList.remove("active");
     quizScreen.classList.add("active");
     showQuestion();
-
+    restartButton.style.backgroundColor = "transparent";
+    restartButton.style.color = "#e67e22";
+    restartButton.style.border = "2px solid #e67e22";
 }
 
 function restartQuiz(){
@@ -238,7 +305,43 @@ function restartQuiz(){
     skipButton.style.backgroundColor = "#e67e22";
     nextQuizButton.style.display = "inline-block";
     resultMessageContainer.classList.remove("fail-theme");
+    restartButton.textContent = "Restart Quiz";
+
+    
+    if(currentStageIndex >= allStages.length - 1 && (score/currentQuizData.length) * 100 >= 60){
+        currentStageIndex = 0;
+        currentQuizData = allStages[currentStageIndex].quiz;
+        totalQuestionsSpan.textContent = currentQuizData.length;
+        maxScoreSpan.textContent = currentQuizData.length;
+        
+        restartButton.textContent = "Start Over";
+        restartButton.style.backgroundColor = "#4CAF50";
+        restartButton.style.color = "#fff";
+        restartButton.style.border = "none";
+        console.log(restartButton.textContent);
+
+    }
     startQuiz();
 }
 
+
+function nextQuiz(){
+    if(currentStageIndex < allStages.length - 1){
+        currentStageIndex++;
+        currentQuestionIndex = 0;
+        score = 0;
+        scoreSpan.textContent = 0;
+        isAnswered = [];
+        currentQuizData = allStages[currentStageIndex].quiz;
+        totalQuestionsSpan.textContent = currentQuizData.length;
+        maxScoreSpan.textContent = currentQuizData.length;
+        resultScreen.classList.remove("active");
+        quizScreen.classList.add("active");
+        showQuestion();
+    }else {
+        alert("Congratulations! You have finished all Ninja Exams!");
+    }
+        
+    
+}
 

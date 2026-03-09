@@ -65,13 +65,13 @@ button {
 }
 
 .skip-btn{
-    align-self: self-end;
+    margin-left: auto;
 }
 
-#start-btn, .skip-btn{
+#start-btn, .skip-btn, .next-btn{
     transition: all 0.2s ease;
 }
-#start-btn:hover, .skip-btn:hover{
+#start-btn:hover, .skip-btn:hover, .next-btn:hover{
     background-color: #f86e2d;
     transform: scale(1.1);
     cursor:pointer;
@@ -172,7 +172,6 @@ button {
 }
 
 #result-message{
-    color: #e86b31;
     font-weight: bold;
 }
 
@@ -182,6 +181,7 @@ button {
     justify-content: space-between;
     margin-bottom: 20px;
 }
+
 
 
 .fail-theme{
