@@ -37,7 +37,7 @@ const allStages = [
         description: "Test your knowledge about Naruto's early adventures and characters in the Genin Exam!",
         quiz: [
             { question: "What is Naruto's signature jutsu?", answers: [{ text: "Rasengan", correct: false }, { text: "Shadow Clone", correct: true }, { text: "Chidori", correct: false }, { text: "Fire Ball", correct: false }] },
-            // { question: "Who is the sensei of Team 7?", answers: [{ text: "Asuma", correct: false }, { text: "Gai", correct: false }, { text: "Kakashi Hatake", correct: true }, { text: "Kurenai", correct: false }] },
+            { question: "Who is the sensei of Team 7?", answers: [{ text: "Asuma", correct: false }, { text: "Gai", correct: false }, { text: "Kakashi Hatake", correct: true }, { text: "Kurenai", correct: false }] },
             // { question: "What village does Naruto live in?", answers: [{ text: "Sunagakure", correct: false }, { text: "Konohagakure", correct: true }, { text: "Kirigakure", correct: false }, { text: "Kumogakure", correct: false }] },
             // { question: "Who is the First Hokage?", answers: [{ text: "Tobirama", correct: false }, { text: "Hashirama Senju", correct: true }, { text: "Minato Namikaze", correct: false }, { text: "Hiruzen", correct: false }] },
             // { question: "What is the name of the fox inside Naruto?", answers: [{ text: "Shukaku", correct: false }, { text: "Kurama", correct: true }, { text: "Matatabi", correct: false }, { text: "Gyuki", correct: false }] },
