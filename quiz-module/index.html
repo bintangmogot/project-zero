@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="files/Konohagakure.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Serif+JP:wght@200..900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="files/ninja-naruto/njnaruto.ttf" rel="stylesheet">
     <title>Quiz Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div id="container" class="container">
         <div id="start-screen" class="screen active">
-            <h1>Quiz Time!</h1>
-            <p>Test your knowledge with these fun questions</p>
+            <h1 id="title-quiz">Quiz Time!</h1>
+            <p id="description-quiz">Test your knowledge with these fun questions</p>
             <button id="start-btn">Start Quiz</button>
         </div>
         <div id="quiz-screen" class="screen">
@@ -40,9 +45,11 @@
                     <p>You scored <span id="final-score">[num]</span> out of <span id="max-score">[num]</span></p>
                     <h2 id="result-message"></h2>
             </div>
-            <button id="restart-btn" class="restart-btn">Restart Quiz</button>
-            <button id="home-btn" class="home-btn">Home</button>
-            <button id="next-quiz-btn" class="next-btn">Next Quiz</button>
+            <div class="result-navigation">
+                <button id="restart-btn" class="restart-btn">Restart Quiz</button>
+                <button id="home-btn" class="home-btn">Home</button>
+                <button id="next-quiz-btn" class="next-btn">Next Quiz</button>
+            </div>
         </div>
     </div>
 

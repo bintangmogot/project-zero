@@ -7,18 +7,64 @@
 
 body{
     background-color: #f4f0e5;
+    background-image: url(files/konoha.gif);
+    background-size:100px;
+    background-repeat: repeat;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #222222;
-    font-family: helvetica, sans serif;
+    font-family: 'Bangers', sans serif;
     text-align: center;
     min-height: 100vh;
     padding: 1rem;
+    animation: gerakLatar 10s linear infinite; 
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: rgba(255, 206, 115, 0.5);
+}
+
+/* Keyframes untuk animasi latar belakang */
+@keyframes gerakLatar {
+    from { background-position: 0 0; }
+    to { background-position: 100px 100px; }
+}
+#start-screen{
+    transition: background-image 0.5s ease-in-out;
+    background-repeat: no-repeat;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    color: #f5f5f5;
+    min-height: 400px;
+    padding: auto 3em;
+}
+
+/* Ini adalah lapisan overlay-nya */
+#start-screen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: -1;
 }
 
 .container{
     background-color: #f9f9f9;
+    border: 3px solid #FF9100;
     width: 100%;
     max-width: 600px;   
     border-radius: 1rem;
@@ -29,27 +75,39 @@ body{
 
 .screen{
     display: none;
+    position: relative;
+    z-index: 1;
 }
 
 .screen.active {
     padding: 3em;
-    display:block;
+    display: flex; /* Atau pakai grid */
+    flex-direction: column;
+    justify-content: center;
+}
+
+#quiz-screen{
+    background-color: #f9f9f9;
 }
 
 #start-screen h1{
-    color: #e86b31;
+    color: #FF9100;
     margin-bottom: 1rem;
     font-weight: bold;
+    font-size: clamp(2rem, 5vw, 3rem);
 }
 
 button {
     padding: 1em 2em;
     border-radius: 8px;
-    background-color: #e86b31;
+    background-color: #FF9100;
     border: none;
     color: #f9f9f9;
     margin-top: 1rem;
     transition: all 0.2s ease;
+    box-shadow: #2222221A 0px 20px 30px;
+    font-family: 'Noto Serif JP', sans-serif;
+    font-weight: 900;
 
 }
 button:hover {
@@ -58,11 +116,30 @@ button:hover {
     transform: scale(1.02);
 }
 
+#start-screen p {
+    font-family: 'Noto Serif JP', sans-serif;
+    font-weight: 900;
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    letter-spacing: 2px;
+}
+
+.result-navigation{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media screen and (max-width: 500px){
+    .result-navigation{
+        flex-direction: column;
+        gap: 0rem;
+    }
+}
 
 .prev-btn, .restart-btn{
     background-color: transparent;
-    border: 2px solid #e86b31;
-    color: #e86b31;
+    border: 2px solid #FF9100;
+    color: #FF9100;
     transition: all 0.2s ease;
 }
 .prev-btn:hover, .restart-btn:hover{
@@ -73,6 +150,7 @@ button:hover {
 
 .skip-btn{
     margin-left: auto;
+    
 }
 
 #start-btn, .skip-btn, .next-btn{
@@ -89,7 +167,7 @@ button:hover {
 }
 
 .quiz-header h2{
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 
@@ -108,24 +186,25 @@ button:hover {
 }
 
 .answers-btn{
-    background-color: #f4f0e5;
-    border: #e86b312b 2px double;
+    background-color: #FFF8E1;
+    
+    border: 2px solid #e0d0b0;
     border-radius: 8px;
     padding: 20px;
     text-align: left;
     color: #222;
-    font-weight: bolder;
+    font-weight: 700;
     transition: all 0.2s ease;
 }
 
 .answers-btn:hover{
-    background-color: #f86d2d1d;
-    border: solid #e86b31;
+    background-color: #fff1c1;
+    border: solid #FF9100;
     cursor: pointer;
 }
 
 .answers-btn:active{
-    background-color: #e86b31;
+    background-color: #FF9100;
     color:#f9f9f9;
 }
 
@@ -149,7 +228,7 @@ button:hover {
 
 .progress{
     height: 100%;
-    background-color: #e86b31;
+    background-color: #FF9100;
     width:0%;
     transition: width 0.3s ease;
 }
@@ -167,8 +246,14 @@ button:hover {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 30px;
-    border: #e86b312b 2px double;
+    border: #FF91002b 2px double;
     box-shadow: 0 30px 40px #2222221A;
+}
+
+h1, h2, #title-quiz, #result-message {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 2px; 
+    font-weight: normal; 
 }
 
 .result-info p {
@@ -197,7 +282,7 @@ button:hover {
 }
 
 .home-btn{
-    background-color: rgb(92, 92, 240);
+    background-color: #1A237E;
     display: none;
 }
 
