@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="zeroGlow" x1="12" y1="10" x2="52" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9cff57"/>
+      <stop offset="1" stop-color="#6df916"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#0f172a"/>
+  <rect x="7" y="7" width="50" height="50" rx="14" fill="none" stroke="#334155" stroke-width="2"/>
+  <ellipse
+    cx="32"
+    cy="32"
+    rx="14"
+    ry="19"
+    fill="none"
+    stroke="url(#zeroGlow)"
+    stroke-linecap="round"
+    stroke-width="7"
+    transform="rotate(-10 32 32)"
+  />
+  <circle cx="32" cy="32" r="3.5" fill="#6df916" opacity="0.9"/>
+</svg>

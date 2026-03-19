@@ -41,6 +41,7 @@ body::before {
 }
 #start-screen{
     transition: background-image 0.5s ease-in-out;
+    background-color: #1A237E;
     background-repeat: no-repeat;
     position: relative;
     background-size: cover;
@@ -50,6 +51,7 @@ body::before {
     min-height: 500px;
     padding: auto 3em;
 }
+
 
 /* Ini adalah lapisan overlay-nya */
 #start-screen::before {
@@ -93,6 +95,7 @@ body::before {
 
 #start-screen h1{
     color: #FF9100;
+    
     margin-bottom: 1rem;
     font-weight: bold;
     font-size: clamp(2rem, 5vw, 3rem);
